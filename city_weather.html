@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City-wise Weather</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>City-wise Weather Data</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>City</th>
+                    <th>Average Temperature (°C)</th>
+                    <th>Max Temperature (°C)</th>
+                    <th>Min Temperature (°C)</th>
+                    <th>Conditions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for city, avg_temp, max_temp, min_temp, conditions in city_weather %}
+                <tr>
+                    <td>{{ city }}</td>
+                    <td>{{ avg_temp }}</td>
+                    <td>{{ max_temp }}</td>
+                    <td>{{ min_temp }}</td>
+                    <td>{{ conditions }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

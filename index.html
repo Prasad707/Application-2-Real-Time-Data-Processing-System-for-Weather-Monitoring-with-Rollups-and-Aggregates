@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" bgcolr="#c66464">
+    <!-- Add in your base layout HTML file, such as `layout.html` -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Weather Monitoring Dashboard</h1>
+        </div>
+    </div>
+</div>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <title>Weather Monitor</title>
+</head>
+<body>
+    <h1>Weather Monitor</h1>
+    
+    <a href="/city_weather">City-wise Weather Data</a>
+
+
+    <h2>Alerts</h2>
+    <ul id="alerts-list"></ul>
+    <a href="/get_alerts">View Alerts</a>
+
+
+    <h2>Daily Summaries</h2>
+    <button onclick="fetchWeatherData()">Fetch Weather Data</button>
+    <ul id="daily-summary-list"></ul>
+
+    <script>
+        function fetchWeatherData() {
+            fetch('/get_weather_data')
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error fetching weather data:', error));
+            fetchAlerts();
+            fetchDailySummary();
+        }
+
+        function fetchAlerts() {
+            fetch('/get_alerts')
+        .then(response => response.json())
+        .then(alerts => {
+            const alertContainer = document.getElementById('alert-container');
+            alertContainer.innerHTML = '';  // Clear previous alerts
+            alerts.forEach(alert => {
+                const alertDiv = document.createElement('div');
+                alertDiv.textContent = `${alert[1]}: ${alert[3]}`;  // Assuming alert[1] = city, alert[3] = alert_message
+                alertContainer.appendChild(alertDiv);
+            });
+        });
+        }
+
+        function fetchDailySummary() {
+            fetch('/daily_summary')
+                .then(response => response.json())
+                .then(summaries => {
+                    const summaryList = document.getElementById('daily-summary-list');
+                    summaryList.innerHTML = ''; // Clear previous summaries
+                    summaries.forEach(summary => {
+                        const li = document.createElement('li');
+                        li.textContent = `Date: ${summary[1]}, Avg Temp: ${summary[2]}°C, Max Temp: ${summary[3]}°C, Min Temp: ${summary[4]}°C, Dominant Condition: ${summary[5]}`;
+                        summaryList.appendChild(li);
+                    });
+                })
+                .catch(error => console.error('Error fetching daily summaries:', error));
+        }
+    </script>
+</body>
+</html>
