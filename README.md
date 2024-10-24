@@ -2,6 +2,7 @@
 
 # File Structure
 weather-monitoring-app/
+
 │
 ├── static/
 │   └── css/
