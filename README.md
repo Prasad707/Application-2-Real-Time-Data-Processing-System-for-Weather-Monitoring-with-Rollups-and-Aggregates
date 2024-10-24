@@ -20,6 +20,9 @@ weather-monitoring-app/
 ├── README.md                     # Project documentation
 └── requirements.txt              # List of dependencies
 
+
+<img width="154" alt="Screenshot 2024-10-24 223739" src="https://github.com/user-attachments/assets/711be168-a591-4850-87a8-5e00a0f173bc">
+
 # Weather Monitoring Application
 
 This is a Flask-based weather monitoring system that retrieves weather data from the OpenWeatherMap API, processes it, stores it in a SQLite database, and provides weather summaries, city-wise weather details, and alerts when temperature exceeds a certain threshold.
